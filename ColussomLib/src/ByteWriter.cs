@@ -26,6 +26,23 @@ public class ByteWriter
 		Endianness = endianness;
 	}
 
+	public void Seek(int offset, SeekOrigin origin = SeekOrigin.Begin)
+	{
+		switch (origin)
+		{
+			case SeekOrigin.Begin:
+				Position = offset;
+				return;
+			case SeekOrigin.Current:
+				Position += offset;
+				return;
+			case SeekOrigin.End:
+				Position = Bytes.Count + offset;
+				return;
+			default: throw new NotSupportedException();
+		}
+	}
+
 	public void Write(byte[] bytes, int source_index, int length)
 	{
 		int writable_slots = Bytes.Count - Position;
