@@ -5,7 +5,7 @@ public class ByteReader
 	private ByteReader()
 	{
 		Bytes = [];
-		Position = -(1L << 62);
+		Position = -(1 << 30);
 	}
 
 	public ByteReader(byte[] data)
@@ -14,14 +14,14 @@ public class ByteReader
 		Position = 0;
 	}
 
-	public ByteReader(byte[] data, long index, Endianness endianness = Endianness.Big)
+	public ByteReader(byte[] data, int index, Endianness endianness = Endianness.Big)
 	{
 		Bytes = data;
 		Position = index;
 		Endianness = endianness;
 	}
 
-	public void Seek(long offset, SeekOrigin origin = SeekOrigin.Begin)
+	public void Seek(int offset, SeekOrigin origin = SeekOrigin.Begin)
 	{
 		switch (origin)
 		{
@@ -124,7 +124,7 @@ public class ByteReader
 		return ((UInt128)ReadULong() << 64) | low;
 	}
 
-	public byte[] Read(uint length)
+	public byte[] Read(int length)
 	{
 		byte[] bytes = new byte[length];
 		Array.Copy(Bytes, Position, bytes, 0, length);
@@ -138,14 +138,14 @@ public class ByteReader
 		Position += bytes.Length;
 	}
 
-	public void Read(byte[] bytes, uint index, uint length)
+	public void Read(byte[] bytes, uint index, int length)
 	{
 		Array.Copy(Bytes, Position, bytes, index, length);
 		Position += length;
 	}
 
 	public Endianness Endianness { get; set; } = Endianness.Big;
-	public long Position
+	public int Position
 	{
 		get => _position;
 		set
@@ -160,6 +160,6 @@ public class ByteReader
 
 	public uint SpaceLeft { get => (uint)(Bytes.Length - Position); }
 
-	private long _position;
+	private int _position;
 	public readonly byte[] Bytes;
 }
