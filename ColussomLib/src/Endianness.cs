@@ -1,6 +1,6 @@
 ﻿namespace Colussom;
 
-public enum Endianness : byte
+public enum Endianness
 {
 	Big,
 	Little
