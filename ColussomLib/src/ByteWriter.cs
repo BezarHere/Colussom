@@ -41,7 +41,7 @@ public class ByteWriter
 
 	public void Write(byte[] bytes) => Write(bytes, 0, bytes.Length);
 
-	public void WriteByte(byte value)
+	public void Write(byte value)
 	{
 		if (Position == Bytes.Count)
 		{
@@ -52,7 +52,7 @@ public class ByteWriter
 		Bytes[Position++] = value;
 	}
 
-	public void WriteSByte(sbyte value)
+	public void Write(sbyte value)
 	{
 		if (Position == Bytes.Count)
 		{
@@ -64,27 +64,27 @@ public class ByteWriter
 	}
 
 
-	public void WriteUShort(ushort value)
+	public void Write(ushort value)
 	{
 		if (Endianness == Endianness.Big)
 		{
-			WriteByte((byte)((value >> 8) & 0xff));
-			WriteByte((byte)(value & 0xff));
+			Write((byte)((value >> 8) & 0xff));
+			Write((byte)(value & 0xff));
 
 		}
 		else
 		{
-			WriteByte((byte)(value & 0xff));
-			WriteByte((byte)((value >> 8) & 0xff));
+			Write((byte)(value & 0xff));
+			Write((byte)((value >> 8) & 0xff));
 		}
 	}
 
-	public void WriteShort(short value)
+	public void Write(short value)
 	{
-		unchecked { WriteUShort((ushort)value); }
+		unchecked { Write((ushort)value); }
 	}
 
-	public void WriteUInt(uint value)
+	public void Write(uint value)
 	{
 		if (Endianness == Endianness.Big)
 		{
@@ -109,12 +109,12 @@ public class ByteWriter
 		Position += 4;
 	}
 
-	public void WriteInt(int value)
+	public void Write(int value)
 	{
-		unchecked { WriteUInt((uint)value); }
+		unchecked { Write((uint)value); }
 	}
 
-	public void WriteULong(ulong value)
+	public void Write(ulong value)
 	{
 		if (Endianness == Endianness.Big)
 		{
@@ -139,12 +139,12 @@ public class ByteWriter
 		Position += 8;
 	}
 
-	public void WriteLong(long value)
+	public void Write(long value)
 	{
-		unchecked { WriteULong((ulong)value); }
+		unchecked { Write((ulong)value); }
 	}
 
-	public void WriteULongLong(UInt128 value)
+	public void Write(UInt128 value)
 	{
 		if (Endianness == Endianness.Big)
 		{
@@ -169,9 +169,9 @@ public class ByteWriter
 		Position += 16;
 	}
 
-	public void WriteLongLong(Int128 value)
+	public void Write(Int128 value)
 	{
-		unchecked { WriteULongLong((UInt128)value); }
+		unchecked { Write((UInt128)value); }
 	}
 
 	public void WriteString(string value) => Write(Encoding.UTF8.GetBytes(value));
