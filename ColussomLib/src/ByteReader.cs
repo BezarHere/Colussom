@@ -4,7 +4,7 @@ public class ByteReader
 {
 	private ByteReader()
 	{
-		Bytes = Array.Empty<byte>();
+		Bytes = [];
 		Position = -(1L << 62);
 	}
 
@@ -14,10 +14,11 @@ public class ByteReader
 		Position = 0;
 	}
 
-	public ByteReader(byte[] data, long index)
+	public ByteReader(byte[] data, long index, Endianness endianness = Endianness.Big)
 	{
 		Bytes = data;
 		Position = index;
+		Endianness = endianness;
 	}
 
 	public void Seek(long offset, SeekOrigin origin = SeekOrigin.Begin)
