@@ -124,6 +124,8 @@ public class ByteReader
 		return ((UInt128)ReadULong() << 64) | low;
 	}
 
+	// TODO: double, float and decimal reading
+
 	public byte[] Read(int length)
 	{
 		byte[] bytes = new byte[length];

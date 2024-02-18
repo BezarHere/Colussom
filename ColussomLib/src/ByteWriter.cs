@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace Colussom;
 
@@ -56,6 +57,8 @@ public class ByteWriter
 		Position += length;
 	}
 
+	// TODO: check if inlining helps
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public void Write(byte[] bytes) => Write(bytes, 0, bytes.Length);
 
 	public void Write(byte value)
@@ -190,6 +193,8 @@ public class ByteWriter
 	{
 		unchecked { Write((UInt128)value); }
 	}
+
+	// TODO: double, float and decimal writing
 
 	public void WriteString(string value) => Write(Encoding.UTF8.GetBytes(value));
 
